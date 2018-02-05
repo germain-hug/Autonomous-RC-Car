@@ -9,7 +9,8 @@
 """
 
 import os
-import pprint
+from datetime import timedelta, date
+import time
 import pygame
 import rospy
 from std_msgs.msg import String
@@ -19,7 +20,9 @@ class ManualDriver(object):
 
     controller = None
     button_data = None
-    mode = None
+    mode = 'manual'
+    recording = False 
+    recording_folder = None
 
     def callback(self, data):
 	self.mode = data.data
@@ -35,25 +38,33 @@ class ManualDriver(object):
     	# Initialize ROS Subscriber
 	rospy.init_node('manual_driver', anonymous=True)
     	rospy.Subscriber('mode', String, self.callback)
-	rospy.spin()
 
-    # Listen for PS4 Controller inputs
+    # Listen for Controller inputs
     def listen(self):
         if not self.button_data:
             self.button_data = {}
             for i in range(self.controller.get_numbuttons()):
                 self.button_data[i] = False
         
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.JOYBUTTONDOWN:
-                    if(event.button==1):
-			rospy.loginfo("Switching to manual...")
-			self.pub.publish("manual")
-		    elif(event.button==3):
-			rospy.loginfo("Switching to auto...")
-			self.pub.publish("auto")
+	while not rospy.is_shutdown():
 
+	    if self.mode =='manual':
+
+		for event in pygame.event.get():
+			if event.type == pygame.JOYBUTTONDOWN:
+
+				# ---- Starting Recording ----
+				if(event.button==0):
+					rospy.loginfo("Starting recording...")
+					self.recording = True
+					self.recording_folder = '../data/' + str(date.today()) + "-" + str(time.strftime("%H-%M-%S"))
+					print self.recording_folder
+					# TODO: mkdir, etc...
+
+				# ---- Stopping Recording ----
+				elif(event.button==2):
+					rospy.loginfo("Stopping recording...")
+					self.recording = False
 
 
 if __name__ == "__main__":
