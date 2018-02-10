@@ -47,7 +47,7 @@ class ManualDriver(object):
     def listen(self):
 
         if not self.axis_data:
-            self.axis_data = {0:0.0,1:0.0,2:0.0,3:0.0,4:0.0}
+            self.axis_data = {0:0.0,1:0.0,2:0.0,3:0.0,4:-1.0}
 
         if not self.button_data:
             self.button_data = {}
