@@ -22,7 +22,6 @@ class Actuator(object):
 		# Send throttle and steering commands
 		self.device.ctrl_transfer(0x40, 0x85, int((1500 + 250 * throttle) * 4), 1)
 		self.device.ctrl_transfer(0x40, 0x85, int((1500 + 500 * steering) * 4), 0)
-		print(throttle, steering)
 
 	def __init__(self):
 		# Connect to Pololu through USB
@@ -39,4 +38,3 @@ class Actuator(object):
 
 if __name__ == '__main__':
     actuator = Actuator()
-    actuator.init()

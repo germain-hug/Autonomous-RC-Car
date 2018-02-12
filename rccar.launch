@@ -1,0 +1,8 @@
+<launch>
+  <!-- Actuator node -->
+  <node name="actuator" pkg="rccar" type="actuator.py" />
+  <!-- Manual Driver node -->
+  <node name="manual_driver" pkg="rccar" type="manual_driver.py" />
+  <!-- Mode Management node -->
+  <node name="mode_management" pkg="rccar" type="mode_management.py" />
+</launch>
