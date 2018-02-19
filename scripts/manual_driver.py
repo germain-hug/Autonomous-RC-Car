@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
 """
-
 - Activated when driving in manual mode
 - Press 'O' to record
 - Press 'square' to stop recording
@@ -13,17 +12,14 @@
 import os
 import time
 import pygame
-
 import rospy
+import imutils
+
 from datetime import timedelta, date
 from std_msgs.msg import String
 from geometry_msgs.msg import Point
-
-import cv2
-import time
-import imutils
 from imutils.video import WebcamVideoStream
-
+from save_data import DataSaver
 
 class ManualDriver(object):
 
@@ -34,9 +30,7 @@ class ManualDriver(object):
 	hat_data = None
 
 	curr_mode = 'manual'
-	recording = False 
-	recording_folder = None
-	recording_csv = None
+	recording = False
 	pub = None
 
 	img_count = 0
@@ -89,7 +83,7 @@ class ManualDriver(object):
 		while not rospy.is_shutdown():
 			if self.curr_mode =='manual':
 				for event in pygame.event.get():
-					print self.recording
+
 					# Stop and start recording
 					if event.type == pygame.JOYBUTTONDOWN:
 
@@ -97,37 +91,19 @@ class ManualDriver(object):
 						if(event.button==2 and not self.recording):
 							rospy.loginfo("Starting recording...")
 							self.recording = True
-							self.recording_folder = '/home/nvidia/jetsonbot/src/rccar/data/' + str(date.today()) + "-" + str(time.strftime("%H-%M-%S")) + "/"
-							if not os.path.exists(self.recording_folder):
-								os.makedirs(self.recording_folder)
-							self.recording_csv = open(self.recording_folder + 'annotations.csv', 'a')
-
+							self.data_saver = DataSaver('/home/nvidia/jetsonbot/src/rccar/data/' + str(date.today()) + "-" + str(time.strftime("%H-%M-%S")) + "/")
 						# Stopping Recording
 						elif(event.button==0 and self.recording):
 							rospy.loginfo("Stopping recording...")
-							if(self.recording_csv is not None):
-								self.recording_csv.close()
-								self.recording_csv = None
-							self.recording = False
-			
+							del self.data_saver
+		
 					# Acceleration and Steering
 					elif event.type == pygame.JOYAXISMOTION:
-						
-						if(self.recording):
-							frame = self.videoStream.read()
-							img_path = self.recording_folder + 'img_' + str(self.img_count) + '.jpg'
-							cv2.imwrite(img_path, frame)
-							self.recording_csv.write(str(self.img_count) + '.jpg, ' + str(throttle) + ', ' + str(steering) + '\n')
-							self.img_count += 1
-
 						self.axis_data[event.axis] = round(event.value,2)
 						throttle = round(0.5 + self.axis_data[4] / 2.0, 5)
 						steering = round(self.axis_data[0], 5)
 						self.pub.publish(Point(throttle,steering,0.0))
 						
-
-
-
 
 
 if __name__ == "__main__":
