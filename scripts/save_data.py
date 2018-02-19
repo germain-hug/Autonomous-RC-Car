@@ -44,7 +44,7 @@ class DataSaver(object):
 		if not os.path.exists(self.path):
 			os.makedirs(self.path)
 		self.recording_csv = open(self.path + 'annotations.csv', 'a')
-
+		
 		# Initialize ROS Subscriber
 		rospy.init_node('data_saver', anonymous=True)
 		rospy.Subscriber('cmd', Point, self.callback)

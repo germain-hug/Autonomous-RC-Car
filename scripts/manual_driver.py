@@ -32,10 +32,6 @@ class ManualDriver(object):
 	curr_mode = 'manual'
 	recording = False
 	pub = None
-
-	img_count = 0
-	videoStream = None
-
 	def callback(self, data):
 		self.curr_mode = data.data
 		rospy.loginfo("Switched to mode: " + self.curr_mode)
@@ -55,14 +51,6 @@ class ManualDriver(object):
 		rospy.init_node('manual_driver', anonymous=True)
 		rospy.Subscriber('mode', String, self.callback)
 		self.pub = rospy.Publisher('cmd', Point, queue_size=1)
-
-		# Open Camera stream
-		self.videoStream = WebcamVideoStream().start()
-		time.sleep(1.0)
-
-	def __exit__(self, exc_type, exc_value, traceback):
-		self.videoStream.stop()
-
 
 	# Listen for Controller inputs
 	def listen(self):
