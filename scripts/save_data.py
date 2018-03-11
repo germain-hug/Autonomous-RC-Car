@@ -25,18 +25,6 @@ class DataSaver(object):
 	img_count = 0
 	videoStream = None
 
-	def callback(self, data):
-		# Pre-process input
-		throttle = max(min(data.x, 0.9), -0.9)
-		steering = -max(min(data.y, 0.9), -0.9)
-		# Read from VideoStream
-		frame = self.videoStream.read()
-		img_path = self.recording_folder + 'img_' + str(self.img_count) + '.jpg'
-		# Export results
-		cv2.imwrite(img_path, frame)
-		self.recording_csv.write(str(self.img_count) + '.jpg, ' + str(throttle) + ', ' + str(steering) + '\n')
-		self.img_count += 1
-
 	def __init__(self, path):
 		# Export path
 		self.path = path
@@ -52,6 +40,19 @@ class DataSaver(object):
 		self.videoStream = WebcamVideoStream().start()
 		time.sleep(1.0)
 		rospy.spin()
+
+
+	def callback(self, data):
+		# Pre-process input
+		throttle = max(min(data.x, 0.9), -0.9)
+		steering = -max(min(data.y, 0.9), -0.9)
+		# Read from VideoStream
+		frame = self.videoStream.read()
+		img_path = self.recording_folder + 'img_' + str(self.img_count) + '.jpg'
+		# Export results
+		cv2.imwrite(img_path, frame)
+		self.recording_csv.write(str(self.img_count) + '.jpg, ' + str(throttle) + ', ' + str(steering) + '\n')
+		self.img_count += 1
 
 	def __exit__(self, exc_type, exc_value, traceback):
 		self.videoStream.stop()

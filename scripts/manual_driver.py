@@ -25,7 +25,7 @@ class ManualDriver(object):
 	# Bluetooth controller
 	controller = None
 	axis_data = None
-	
+
 	curr_mode = 'manual'
 	recording = False
 	pub = None
@@ -66,7 +66,8 @@ class ManualDriver(object):
 						if(event.button==2 and not self.recording):
 							rospy.loginfo("Starting recording...")
 							self.recording = True
-							self.data_saver = DataSaver('/home/nvidia/jetsonbot/src/rccar/data/' + str(date.today()) + "-" + str(time.strftime("%H-%M-%S")) + "/")
+							folder_name = str(date.today()) + "-" + str(time.strftime("%H-%M-%S")) + "/"
+							self.data_saver = DataSaver('/home/nvidia/jetsonbot/src/rccar/data/' + folder_name)
 						# Stopping Recording
 						elif(event.button==0 and self.recording):
 							rospy.loginfo("Stopping recording...")
