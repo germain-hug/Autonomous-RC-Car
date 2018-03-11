@@ -55,22 +55,18 @@ class ManualDriver(object):
 		while not rospy.is_shutdown():
 			if self.curr_mode =='manual':
 				for event in pygame.event.get():
-
 					# Stop and start recording
 					if event.type == pygame.JOYBUTTONDOWN:
-
 						# Starting Recording
 						if(event.button==2 and not self.recording):
 							rospy.loginfo("Starting recording...")
-							self.recording = True
 							folder_name = str(date.today()) + "-" + str(time.strftime("%H-%M-%S")) + "/"
 							self.data_saver = DataSaver('/home/nvidia/jetsonbot/src/rccar/data/' + folder_name)
-
+							self.recording = True
 						# Stopping Recording
 						elif(event.button==0 and self.recording):
 							rospy.loginfo("Stopping recording...")
 							del self.data_saver
-
 					# Acceleration and Steering
 					elif event.type == pygame.JOYAXISMOTION:
 						self.axis_data[event.axis] = round(event.value,2)
