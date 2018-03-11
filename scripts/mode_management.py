@@ -5,24 +5,16 @@ import pygame
 import rospy
 from std_msgs.msg import String
 from geometry_msgs.msg import Point
+from train import Trainer
 
 class ModeManager(object):
-	# Bluetooth controller
-	controller = None
-
-	# ROS publishers
-	mode_pub = None
-	cmd_pub = None
-	mode = None
-
-	# Self-Driving core
-	self_driver = SelfDriver()
-
+	""" ** Mode Manager Node **
+	"""
 	def __init__(self):
-
 		# Initialize joystick receiver using pygame
 		pygame.init()
 		pygame.joystick.init()
+		self.controller = None
 		while self.controller is None:
 			try:
 				self.controller = pygame.joystick.Joystick(0)
@@ -35,10 +27,13 @@ class ModeManager(object):
 		self.cmd_pub  = rospy.Publisher('cmd', Point, queue_size=1)
 		rospy.init_node('controller', anonymous=True)
 
+		# Initialize Keras model Trainer
+		self.trainer = Trainer()
+
 	# Listen for PS4 Controller inputs
 	def listen(self):
 		# Mode management
-		while True:
+		while not rospy.is_shutdown():
 			for event in pygame.event.get():
 				if event.type == pygame.JOYBUTTONDOWN:
 					if(event.button==1):
@@ -59,7 +54,7 @@ class ModeManager(object):
 						rospy.loginfo("Training model...")
 						self.mode_pub.publish("none")
 						# Train model
-						self.self_driver.train()
+						self.trainer.train()
 
 if __name__ == "__main__":
     mm = ModeManager()

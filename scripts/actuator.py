@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 
-"""
-Reads commands through the 'cmd' topic, controls the motors
-"""
-
 import os
 import usb.core
 import usb.util
@@ -11,10 +7,10 @@ import rospy
 from geometry_msgs.msg import Point
 
 class Actuator(object):
+	""" ** Actuator Node **
+	Reads commands through the 'cmd' topic, controls the motors
+	"""
 
-	device = None
-	configuration = None
-	
 	def callback(self, data):
 		# Pre-process input
 		throttle = max(min(data.x, 0.9), -0.9)
