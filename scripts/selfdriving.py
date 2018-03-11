@@ -11,17 +11,18 @@ import glob
 from keras.layers import *
 from numpy import genfromtxt
 
-class KerasTrainer(object):
+class SelfDriver(object):
 	def __init__(self):
         # Data path
 		self.data_path = 'data/'
         self.bs=64
         self.no_of_epochs=1
-        self.prepare_data()
         self.build_network()
-        self.train()
+
+    def predict(test)
 
 	def train(self):
+        self.prepare_data()
         self.model.fit(self.X, self.Y, batch_size=self.bs, nb_epoch=self.no_of_epochs)
         self.model.save("models/model.h5")
 

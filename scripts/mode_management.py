@@ -15,6 +15,9 @@ class ModeManager(object):
 	cmd_pub = None
 	mode = None
 
+	# Self-Driving core
+	self_driver = SelfDriver()
+
 	def __init__(self):
 
 		# Initialize joystick receiver using pygame
@@ -50,7 +53,13 @@ class ModeManager(object):
 						rospy.loginfo("Switching to auto...")
 						# Switch to auto
 						self.mode_pub.publish("auto")
-
+					elif(event.button==4): # L1
+						# Stop the cars motors and reset s
+						self.cmd_pub.publish(Point(0.0,0.0, 0.0))
+						rospy.loginfo("Training model...")
+						self.mode_pub.publish("none")
+						# Train model
+						self.self_driver.train()
 
 if __name__ == "__main__":
     mm = ModeManager()
