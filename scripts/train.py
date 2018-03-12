@@ -20,7 +20,7 @@ class Trainer(object):
 
 	def prepare_data(self):
 		fnames = glob.glob("/data/*/*.csv")
-		self.X = [], self.Y = []
+		self.X, self.Y = [], []
 		for f in fnames:
 			annotations = genfromtxt(f, delimiter=',')
 			x = np.array([np.array(Image.open(fname)) for fname in annotations[:,0]])
