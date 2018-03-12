@@ -7,6 +7,7 @@ import numpy as np
 
 from utils import network
 from numpy import genfromtxt
+from PIL import Image
 
 class Trainer(object):
 	""" Train a Keras model on all captured data
@@ -24,7 +25,7 @@ class Trainer(object):
 		print(fnames)
 		self.X, self.Y = [], []
 		for f in fnames:
-			annotations = genfromtxt(f, delimiter=',')
+			annotations = genfromtxt(f, delimiter=',', dtype="|U5")
 			print(annotations.shape)
 			print(annotations[0:10,0:])
 			x = np.array([np.array(Image.open(fname)) for fname in annotations[:,0]])
