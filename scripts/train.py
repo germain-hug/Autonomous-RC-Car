@@ -3,6 +3,7 @@
 import os
 import sys
 import glob
+import numpy as np
 
 from utils import network
 from numpy import genfromtxt
@@ -24,6 +25,8 @@ class Trainer(object):
 		self.X, self.Y = [], []
 		for f in fnames:
 			annotations = genfromtxt(f, delimiter=',')
+			print(annotations.shape)
+			print(annotations[0:10,0:])
 			x = np.array([np.array(Image.open(fname)) for fname in annotations[:,0]])
 			y = [np.array(label) for label in annotations[:,1:2]]
 			print(y)
