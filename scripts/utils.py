@@ -8,9 +8,8 @@ def network(img_shape):
     x = BatchNormalization(axis=1)(img_input)
     x = incep_block(x)
     x = incep_block(x)
-    x = incep_block(x)
     x = Dropout(0.6)(x)
-    x = Convolution2D(8,3,3, border_mode='same')(x)
+    x = Flatten()(x)
     output = Dense(2, activation='tanh')(x)
     return Model(img_input, output)
 
