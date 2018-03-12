@@ -28,7 +28,7 @@ class DataSaver(object):
 		# Open Camera stream
 		self.videoStream = WebcamVideoStream().start()
 		time.sleep(1.0)
-		rospy.spin()
+		#rospy.spin()
 
 	def callback(self, data):
 		# Pre-process input
