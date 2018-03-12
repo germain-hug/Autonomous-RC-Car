@@ -23,7 +23,7 @@ class DataSaver(object):
 		self.recording_csv = open(self.path + 'annotations.csv', 'a')
 
 		# Initialize ROS Subscriber
-		rospy.Subscriber('cmd', Point, self.callback)
+		rospy.Subscriber('cmd', Point, self.callback, queue_size=1)
 
 		# Open Camera stream
 		self.videoStream = WebcamVideoStream().start()
@@ -37,8 +37,8 @@ class DataSaver(object):
 		print(data)
 		# Read from VideoStream
 		frame = self.videoStream.read()
-		img_path = self.path + 'img_' + str(self.img_count) + '.jpg'
 		# Export results
+		img_path = self.path + 'img_' + str(self.img_count) + '.jpg'
 		cv2.imwrite(img_path, frame)
 		self.recording_csv.write(str(self.img_count) + '.jpg, ' + str(throttle) + ', ' + str(steering) + '\n')
 		self.img_count += 1
