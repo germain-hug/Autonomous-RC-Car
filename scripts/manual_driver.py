@@ -67,12 +67,14 @@ class ManualDriver(object):
 						elif(event.button==0 and self.recording):
 							rospy.loginfo("Stopping recording...")
 							del self.data_saver
+							self.recording = False
 					# Acceleration and Steering
 					elif event.type == pygame.JOYAXISMOTION:
 						self.axis_data[event.axis] = round(event.value,2)
 						throttle = round(0.5 + self.axis_data[4] / 2.0, 5)
 						steering = round(self.axis_data[0], 5)
 						self.pub.publish(Point(throttle,steering,0.0))
+						print(throttle, steering)
 
 if __name__ == "__main__":
 	manual_driver = ManualDriver()
