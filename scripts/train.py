@@ -13,10 +13,10 @@ class Trainer(object):
 	def __init__(self):
         # Data path
 		self.data_path = 'data/'
-        self.batch_size = 64
-        self.no_of_epochs = 1
-        self.img_shape = (224, 224, 3)
-        self.model = network(self.img_shape)
+		self.batch_size = 64
+		self.no_of_epochs = 1
+		self.img_shape = (224, 224, 3)
+		self.model = network(self.img_shape)
 
 	def train(self):
 		self.prepare_data()
