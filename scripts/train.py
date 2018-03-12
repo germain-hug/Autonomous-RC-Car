@@ -18,11 +18,6 @@ class Trainer(object):
 		self.img_shape = (224, 224, 3)
 		self.model = network(self.img_shape)
 
-	def train(self):
-		self.prepare_data()
-		self.model.fit(self.X, self.Y, batch_size=self.batch_size, nb_epoch=self.no_of_epochs)
-		self.model.save("models/model.h5")
-
 	def prepare_data(self):
 		fnames = glob.glob("/data/*/*.csv")
 		self.X = [], self.Y = []
@@ -32,3 +27,8 @@ class Trainer(object):
 			y = [np.array(label) for label in annotations[:,1:2]]
 			self.X.append(x)
 			self.Y.append(y)
+
+	def train(self):
+		self.prepare_data()
+		self.model.fit(self.X, self.Y, batch_size=self.batch_size, nb_epoch=self.no_of_epochs)
+		self.model.save("../models/model.h5")
