@@ -16,7 +16,7 @@ class DataSaver(object):
 
 	def __init__(self, path):
 		# Export path
-		self.recording_folder = path
+		self.path = path
 		self.img_count = 0
 		if not os.path.exists(self.path):
 			os.makedirs(self.path)
@@ -36,7 +36,7 @@ class DataSaver(object):
 		steering = -max(min(data.y, 0.9), -0.9)
 		# Read from VideoStream
 		frame = self.videoStream.read()
-		img_path = self.recording_folder + 'img_' + str(self.img_count) + '.jpg'
+		img_path = self.path + 'img_' + str(self.img_count) + '.jpg'
 		# Export results
 		cv2.imwrite(img_path, frame)
 		self.recording_csv.write(str(self.img_count) + '.jpg, ' + str(throttle) + ', ' + str(steering) + '\n')
