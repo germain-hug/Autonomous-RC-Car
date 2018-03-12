@@ -15,7 +15,7 @@ class Trainer(object):
 		self.data_path = 'data/'
 		self.batch_size = 64
 		self.no_of_epochs = 1
-		self.img_shape = (224, 224, 3)
+		self.img_shape = (480, 640, 3)
 		self.model = network(self.img_shape)
 
 	def prepare_data(self):
@@ -25,6 +25,7 @@ class Trainer(object):
 			annotations = genfromtxt(f, delimiter=',')
 			x = np.array([np.array(Image.open(fname)) for fname in annotations[:,0]])
 			y = [np.array(label) for label in annotations[:,1:2]]
+			print(y)
 			self.X.append(x)
 			self.Y.append(y)
 
