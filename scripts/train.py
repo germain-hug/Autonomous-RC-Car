@@ -23,8 +23,8 @@ class Trainer(object):
         self.model.fit(self.X, self.Y, batch_size=self.bs, nb_epoch=self.no_of_epochs)
         self.model.save("models/model.h5")
 
-    def prepare_data(self):
-        fnames = glob.glob("/data/*/*.csv")
+	def prepare_data(self):
+		fnames = glob.glob("/data/*/*.csv")
         self.X = [], self.Y = []
         for f in fnames:
             annotations = genfromtxt(f, delimiter=',')
