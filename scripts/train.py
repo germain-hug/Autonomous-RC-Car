@@ -29,7 +29,7 @@ class Trainer(object):
 			print(annotations.shape)
 			print(annotations[0:10,0:])
 			x = np.array([np.array(Image.open(f[:-15] + 'img_' + fname)) for fname in annotations[:,0]])
-			y = [np.array(label) for label in annotations[:,1:2]]
+			y = [np.array(label, dtype=np.float32) for label in annotations[:,1:]]
 			print(y)
 			self.X.append(x)
 			self.Y.append(y)
