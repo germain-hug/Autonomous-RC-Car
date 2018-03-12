@@ -23,6 +23,7 @@ class ModeManager(object):
 		self.controller.init()
 
 		# Initialize ROS Publisher
+		self.mode = None
 		self.mode_pub = rospy.Publisher('mode', String, queue_size=10)
 		self.cmd_pub  = rospy.Publisher('cmd', Point, queue_size=1)
 		rospy.init_node('controller', anonymous=True)
@@ -36,24 +37,22 @@ class ModeManager(object):
 		while not rospy.is_shutdown():
 			for event in pygame.event.get():
 				if event.type == pygame.JOYBUTTONDOWN:
-					if(event.button==1):
-						# Stop the cars motors
+					if(event.button==1 and self.mode!='manual'):
 						self.cmd_pub.publish(Point(0.0,0.0, 0.0))
 						rospy.loginfo("Switching to manual...")
-						# Switch to manual
 						self.mode_pub.publish("manual")
-					elif(event.button==3):
+						self.mode = 'manual'
+					elif(event.button==3 and self.mode!='auto'):
 						# Stop the cars motors
 						self.cmd_pub.publish(Point(0.0,0.0, 0.0))
 						rospy.loginfo("Switching to auto...")
-						# Switch to auto
 						self.mode_pub.publish("auto")
+						self.mode = 'auto'
 					elif(event.button==4): # L1
 						# Stop the cars motors and reset s
 						self.cmd_pub.publish(Point(0.0,0.0, 0.0))
 						rospy.loginfo("Training model...")
 						self.mode_pub.publish("none")
-						# Train model
 						self.trainer.train()
 
 if __name__ == "__main__":
