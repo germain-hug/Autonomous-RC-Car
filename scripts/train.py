@@ -19,7 +19,7 @@ class Trainer(object):
         self.model = network(self.img_shape)
 
 	def train(self):
-        self.prepare_data()
+		self.prepare_data()
         self.model.fit(self.X, self.Y, batch_size=self.bs, nb_epoch=self.no_of_epochs)
         self.model.save("models/model.h5")
 
