@@ -19,7 +19,8 @@ class Trainer(object):
 		self.model = network(self.img_shape)
 
 	def prepare_data(self):
-		fnames = glob.glob("/data/*/*.csv")
+		fnames = glob.glob("../data/*/*.csv")
+		print(fnames)
 		self.X, self.Y = [], []
 		for f in fnames:
 			annotations = genfromtxt(f, delimiter=',')
