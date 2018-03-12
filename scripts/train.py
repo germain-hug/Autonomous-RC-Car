@@ -28,7 +28,7 @@ class Trainer(object):
 			annotations = genfromtxt(f, delimiter=',', dtype="|U5")
 			print(annotations.shape)
 			print(annotations[0:10,0:])
-			x = np.array([np.array(Image.open(f[:-15] + fname)) for fname in annotations[:,0]])
+			x = np.array([np.array(Image.open(f[:-15] + '_img' + fname)) for fname in annotations[:,0]])
 			y = [np.array(label) for label in annotations[:,1:2]]
 			print(y)
 			self.X.append(x)
