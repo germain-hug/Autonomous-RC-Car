@@ -16,7 +16,7 @@ class DataSaver(object):
 
 	def __init__(self, path):
 		# Export path
-		self.path = path
+		self.recording_folder = path
 		self.img_count = 0
 		if not os.path.exists(self.path):
 			os.makedirs(self.path)
@@ -28,7 +28,7 @@ class DataSaver(object):
 		# Open Camera stream
 		self.videoStream = WebcamVideoStream().start()
 		time.sleep(1.0)
-		#rospy.spin()
+		rospy.spin()
 
 	def callback(self, data):
 		# Pre-process input
