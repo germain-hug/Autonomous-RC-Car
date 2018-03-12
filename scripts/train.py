@@ -24,7 +24,7 @@ class Trainer(object):
 		fnames = glob.glob("../data/*/*.csv")
 		self.Y = []
 		for f in fnames:
-			annotations = genfromtxt(f, delimiter=',', dtype=float)
+			annotations = genfromtxt(f, delimiter=',', dtype=object)
 			self.Y.append([np.array(label, dtype=np.float32) for label in annotations[:,1:]])
 		print(Y.shape)
 
