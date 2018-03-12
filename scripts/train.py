@@ -25,9 +25,9 @@ class Trainer(object):
 		self.Y = []
 		for f in fnames:
 			annotations = genfromtxt(f, delimiter=',', dtype=object)
-			self.Y = np.append(self.Y, [np.array(label, dtype=np.float32)
-				for label in annotations[:,1:]], axis=0)
-		print(self.Y)
+			self.Y.append([np.array(label, dtype=np.float32) for label in annotations[:,1:]])
+		print(np.asarray(self.Y))
+		print(np.asarray(self.Y).shape)
 
 	def train(self):
 		self.prepare_data()
