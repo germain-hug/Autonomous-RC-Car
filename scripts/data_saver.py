@@ -34,7 +34,7 @@ class DataSaver(object):
 		# Pre-process input
 		throttle = max(min(data.x, 0.9), -0.9)
 		steering = -max(min(data.y, 0.9), -0.9)
-		print(data.x, data.y)
+		print(data)
 		# Read from VideoStream
 		frame = self.videoStream.read()
 		img_path = self.path + 'img_' + str(self.img_count) + '.jpg'
