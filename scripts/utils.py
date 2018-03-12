@@ -1,5 +1,5 @@
 from keras.layers import *
-from keras import Model
+from keras.models import Model
 
 def network(img_shape):
     """ Small Keras Inception Network
