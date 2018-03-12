@@ -31,4 +31,4 @@ def incep_block(x):
     branch3x3dbl = conv_block(branch3x3dbl, 48, 3, 3, subsample=(2, 2))
     branch_pool = AveragePooling2D((3, 3), strides=(2, 2), border_mode='same')(x)
     branch_pool = conv_block(branch_pool, 16, 1, 1)
-    return merge([branch1x1, branch5x5, branch3x3dbl, branch_pool], mode='concat', concat_axis=1)
+    return merge([branch1x1, branch5x5, branch3x3dbl, branch_pool], mode='concat', concat_axis=3)
