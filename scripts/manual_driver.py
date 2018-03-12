@@ -74,7 +74,6 @@ class ManualDriver(object):
 						throttle = round(0.5 + self.axis_data[4] / 2.0, 5)
 						steering = round(self.axis_data[0], 5)
 						self.pub.publish(Point(throttle,steering,0.0))
-						print(throttle, steering)
 
 if __name__ == "__main__":
 	manual_driver = ManualDriver()
