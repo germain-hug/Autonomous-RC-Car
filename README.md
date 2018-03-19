@@ -1,6 +1,6 @@
 # Self-Driving RC-Car project  
 ROS Software for performing autonomous driving using monocular vision on an RC car.  
-This package was designed to run on an (Nvidia Jetson TX2)[https://developer.nvidia.com/embedded/buy/jetson-tx2] using a PS4 controller. It provides two driving mode:  
+This package was designed to run on an [Nvidia Jetson TX2](https://developer.nvidia.com/embedded/buy/jetson-tx2) using a PS4 controller. It provides two driving mode:  
 - `manual`: The default mode. In this mode, you can drive the RC Car manually using the paired PS4 controller. You can also recording driving sequences to assemble new training data. Pressing L1, you can retrain a model from scratch using. 
 - `autonomous`: The self-driving mode. This mode enables the trained residual network to perform steering and throttle inference from input images. 
 
@@ -24,18 +24,21 @@ You will also need to have OpenCV installed.
 
 ### Hardware  
 Here is a non-exhaustive list of the hardware used in this project:
-- (Nvidia Jetson TX2)[https://developer.nvidia.com/embedded/buy/jetson-tx2]  
-- (Orbitty Carrier Board)[http://connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/]  
-- (Traxxas 4WD RC-Car)[http://a.co/hHWuW0X]
-- (Pololu Micro Maestro Controller)[https://www.pololu.com/product/1350]
-- (Spinel 2Mp / 140° FOV USB Camera)[https://www.amazon.com/gp/product/B075DJ7KMB/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1]
-- (4000mA 11.1V LiPo Battery)[http://a.co/hUDvt8R]
-- (Playstation Dualshock 4 Controller)[http://a.co/hkcDLfu]
-- (LiPo Battery Charger[http://a.co/7dZDCbX]  
-Hardware assembly should be fairly simple, and additional ressources can be found (here)[https://diyrobocars.com/resources/]  
+- [Nvidia Jetson TX2](https://developer.nvidia.com/embedded/buy/jetson-tx2)   
+- [Orbitty Carrier Board](http://connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/)  
+- [Traxxas 4WD RC-Car](http://a.co/hHWuW0X)
+- [Pololu Micro Maestro Controller](https://www.pololu.com/product/1350)
+- [Spinel 2Mp / 140° FOV USB Camera](https://www.amazon.com/gp/product/B075DJ7KMB/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1)
+- [4000mA 11.1V LiPo Battery](http://a.co/hUDvt8R)
+- [Playstation Dualshock 4 Controller](http://a.co/hkcDLfu)
+- [LiPo Battery Charger](http://a.co/7dZDCbX)  
+Hardware assembly should be fairly simple, and additional ressources can be found [here](https://diyrobocars.com/resources/)  
 
 ## Running the software
-
+To launch the software, run:
+```bash  
+roslaunch rccar.launch
+```  
 
 ## Node description  
 
