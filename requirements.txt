@@ -4,3 +4,4 @@ tensorflow-gpu
 h5py
 imutils
 pygame
+libusb1
