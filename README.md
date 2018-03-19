@@ -32,6 +32,7 @@ Here is a non-exhaustive list of the hardware used in this project:
 - [4000mA 11.1V LiPo Battery](http://a.co/hUDvt8R)
 - [Playstation Dualshock 4 Controller](http://a.co/hkcDLfu)
 - [LiPo Battery Charger](http://a.co/7dZDCbX)  
+
 Hardware assembly should be fairly simple, and additional ressources can be found [here](https://diyrobocars.com/resources/)  
 
 ## Running the software
@@ -41,4 +42,7 @@ roslaunch rccar.launch
 ```  
 
 ## Node description  
-
+- `mode_management.py`: Mode manager, activates manual and self-driving modes through `/mode` and allows for model retraining.
+- `manual_driver.py`: Publishes PS4 manual commands on `/cmd`, enables data capture mode. 
+- `self_driver.py`: Streams from camera, and publishes inferred throttle and steering commands on `/cmd`
+- `actuator.py`: Receives throttle and steering commands through the `/cmd` topic, pre-processes them transmits them to the servo-controller.  
