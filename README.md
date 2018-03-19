@@ -9,15 +9,21 @@ This package was designed to run on an (Nvidia Jetson TX2)[https://developer.nvi
 <br /> 
 
 ## Getting started:  
-### Software  
+### Software   
 To install the ros package run:  
 ```bash  
 cd $CATKIN_WS/src/  
 git clone https://github.com/germain-hug/Autonomous-RC-Car.git  
 cd .. && catkin_make
-```
+```  
+To install dependencies run:  
+```bash  
+pip install -r requirements.txt
+```  
+You will also need to have OpenCV installed.
 ### Hardware  
-
+Here is an overview of the hardware used in this project:
+- 
 ## Running the software
 
 
