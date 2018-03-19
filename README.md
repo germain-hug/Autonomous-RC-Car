@@ -20,10 +20,20 @@ To install dependencies run:
 ```bash  
 pip install -r requirements.txt
 ```  
-You will also need to have OpenCV installed.
+You will also need to have OpenCV installed.  
+
 ### Hardware  
-Here is an overview of the hardware used in this project:
-- 
+Here is a non-exhaustive list of the hardware used in this project:
+- (Nvidia Jetson TX2)[https://developer.nvidia.com/embedded/buy/jetson-tx2]  
+- (Orbitty Carrier Board)[http://connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/]  
+- (Traxxas 4WD RC-Car)[http://a.co/hHWuW0X]
+- (Pololu Micro Maestro Controller)[https://www.pololu.com/product/1350]
+- (Spinel 2Mp / 140° FOV USB Camera)[https://www.amazon.com/gp/product/B075DJ7KMB/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1]
+- (4000mA 11.1V LiPo Battery)[http://a.co/hUDvt8R]
+- (Playstation Dualshock 4 Controller)[http://a.co/hkcDLfu]
+- (LiPo Battery Charger[http://a.co/7dZDCbX]  
+Hardware assembly should be fairly simple, and additional ressources can be found (here)[https://diyrobocars.com/resources/]  
+
 ## Running the software
 
 
